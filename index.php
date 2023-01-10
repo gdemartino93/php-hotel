@@ -61,6 +61,17 @@
     </style>
 </head>
 <body>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome </th>
+            <th scope="col">Descrizione </th>
+            <th scope="col">Parcheggio </th>
+            <th scope="col">Voto </th>
+            <th scope="col"> Distanza dal centro </th>
+        </tr>
+    </thead>
+    <tbody>
     <?php
     foreach ($hotels as $hotel){
         $name = $hotel["name"];
@@ -68,9 +79,22 @@
         $parking = $hotel["parking"];
         $vote = $hotel["vote"];
         $distanceToCenter = $hotel["distance_to_center"];
-        echo "<div class='item'>" . "Nome:" . $name. "<br>" . "Descrizione: " . $description . "<br>" . "Parcheggio:" . $parking . "<br>" . "Voto:" . $vote ."<br>" . "Distanza dal centro: " . $distanceToCenter . "br" . "</div>" . "<br>" ;
+
+        echo '
+          <tr>
+            <th scope="row">nome</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <th>asd</td>
+          </tr>';
+        // echo "<div class='item'>" . "Nome:" . $name. "<br>" . "Descrizione: " . $description . "<br>" . "Parcheggio:" . $parking . "<br>" . "Voto:" . $vote ."<br>" . "Distanza dal centro: " . $distanceToCenter . "br" . "</div>" . "<br>" ;
     }
     ?>
+
+    </tbody>
+    
+</table>
 
 </body>
 </html>
