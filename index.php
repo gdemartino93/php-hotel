@@ -45,8 +45,31 @@
             ],
         ];
     ?>
+    <style lang="">
+.item {
+  width:500px;
+  background-color: bisque;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+  padding: 2rem;
+  box-shadow: 5px 5px 10px black;
+}
+    </style>
 </head>
 <body>
-    
+    <?php
+    foreach ($hotels as $hotel){
+        $name = $hotel["name"];
+        $description = $hotel["description"];
+        $parking = $hotel["parking"];
+        $vote = $hotel["vote"];
+        $distanceToCenter = $hotel["distance_to_center"];
+        echo "<div class='item'>" . "Nome:" . $name. "<br>" . "Descrizione: " . $description . "<br>" . "Parcheggio:" . $parking . "<br>" . "Voto:" . $vote ."<br>" . "Distanza dal centro: " . $distanceToCenter . "br" . "</div>" . "<br>" ;
+    }
+    ?>
+
 </body>
 </html>
