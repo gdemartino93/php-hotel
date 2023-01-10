@@ -61,7 +61,7 @@
     </style>
 </head>
 <body>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Nome </th>
@@ -80,15 +80,16 @@
         $vote = $hotel["vote"];
         $distanceToCenter = $hotel["distance_to_center"];
 
-        echo '
-          <tr>
-            <th scope="row">nome</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <th>asd</td>
-          </tr>';
-        // echo "<div class='item'>" . "Nome:" . $name. "<br>" . "Descrizione: " . $description . "<br>" . "Parcheggio:" . $parking . "<br>" . "Voto:" . $vote ."<br>" . "Distanza dal centro: " . $distanceToCenter . "br" . "</div>" . "<br>" ;
+        echo 
+          '<tr>' .
+            '<th scope="row">' . $name . '</th>' .
+            '<td>' . $description .'</td>' .
+            '<td>' . $parking .'</td>' .
+            '<td>' . $vote .'</td>' .
+            '<td>' . $distanceToCenter .'</td>' .
+            
+            
+          '</tr>';
     }
     ?>
 
