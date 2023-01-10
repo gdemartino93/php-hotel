@@ -45,57 +45,68 @@
                 'distance_to_center' => 50
             ],
         ];
+    $userVote = $_GET["vote"];
+
     ?>
-    <style lang="">
-.item {
-  width:500px;
-  background-color: bisque;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px auto;
-  padding: 2rem;
-  box-shadow: 5px 5px 10px black;
-}
-    </style>
 </head>
 <body>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Nome </th>
-            <th scope="col">Descrizione </th>
-            <th scope="col">Parcheggio </th>
-            <th scope="col">Voto </th>
-            <th scope="col"> Distanza dal centro </th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php
-    foreach ($hotels as $hotel){
-        $name = $hotel["name"];
-        $description = $hotel["description"];
-        $parking = $hotel["parking"];
-        $vote = $hotel["vote"];
-        $distanceToCenter = $hotel["distance_to_center"];
-
-        echo 
-          '<tr>' .
-            '<th scope="row">' . $name . '</th>' .
-            '<td>' . $description .'</td>' .
-            '<td>' . $parking .'</td>' .
-            '<td>' . $vote .'</td>' .
-            '<td>' . $distanceToCenter .'</td>' .
+<div class="container">
+    <div class="row d-flex justify-content-start align-items-center my-5">
+        <form class="d-flex flex-column col-4 ">
+            <label>Parcheggio Disponibile <input type="checkbox" name="parking" id="yes" class="mx-4"></label>
             
-            
-          '</tr>';
-    }
-    ?>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Inserisci il voto da 1 a 5" aria-label="Recipient's username" aria-describedby="button-addon2" name="vote">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" >Button</button>
+            </div>
 
-    </tbody>
-    
-</table>
+            
+        </form>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nome </th>
+                <th scope="col">Descrizione </th>
+                <th scope="col">Parcheggio </th>
+                <th scope="col">Voto </th>
+                <th scope="col"> Distanza dal centro </th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($hotels as $hotel){
+            $name = $hotel["name"];
+            $description = $hotel["description"];
+            $parking = $hotel["parking"];
+            $vote = $hotel["vote"];
+            $distanceToCenter = $hotel["distance_to_center"];
+            echo
+            '<tr>' .
+                '<th scope="row">' . $name . '</th>' .
+                '<td>' . $description .'</td>' .
+                '<td>' . $parking .'</td>' .
+                '<td>' . $vote .'</td>' .
+                '<td>' . $distanceToCenter .'</td>' .
+                
+                
+            '</tr>';
+        };
+        echo $userVote;
+        $filteredArray = array_filter(
+            $hotels,
+            function($vote){
+                return $vote === $userVote;
+            }
+        );
+        echo $filteredArray;
+        ?>
+
+        </tbody>
+        
+    </table>
+</div>
 
 </body>
 </html>
