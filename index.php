@@ -45,16 +45,15 @@
                 'distance_to_center' => 50
             ],
         ];
-    $userVote = $_GET["vote"];
-    $filteredArray = array_filter(
-        $hotels,
-        function($vote){
-            return $vote === $userVote;
-        }
-    );
-    echo $filteredArray;
+        $filteredArray = array_filter(
+            $hotels,
+            function($hotel){
+                return $hotel['vote'] == $_GET["vote"];
+            }
+        );
+        // var_dump($filteredArray);
     ?>
-    ?>
+
 </head>
 <body>
 <div class="container">
@@ -83,25 +82,48 @@
         </thead>
         <tbody>
         <?php
-        foreach ($hotels as $hotel){
-            $name = $hotel["name"];
-            $description = $hotel["description"];
-            $parking = $hotel["parking"];
-            $vote = $hotel["vote"];
-            $distanceToCenter = $hotel["distance_to_center"];
-            echo
-            '<tr>' .
-                '<th scope="row">' . $name . '</th>' .
-                '<td>' . $description .'</td>' .
-                '<td>' . $parking .'</td>' .
-                '<td>' . $vote .'</td>' .
-                '<td>' . $distanceToCenter .'</td>' .
-                
-                
-            '</tr>';
-        };
-        echo $userVote;
 
+        if (isset($_GET["vote"]) === false){
+
+       
+            foreach ($hotels as $hotel){
+                $name = $hotel["name"];
+                $description = $hotel["description"];
+                $parking = $hotel["parking"];
+                $vote = $hotel["vote"];
+                $distanceToCenter = $hotel["distance_to_center"];
+                echo
+                '<tr>' .
+                    '<th scope="row">' . $name . '</th>' .
+                    '<td>' . $description .'</td>' .
+                    '<td>' . $parking .'</td>' .
+                    '<td>' . $vote .'</td>' .
+                    '<td>' . $distanceToCenter .'</td>' .
+                    
+                    
+                '</tr>';
+            };
+        }else{
+            foreach ($filteredArray as $hotel){
+                $name = $hotel["name"];
+                $description = $hotel["description"];
+                $parking = $hotel["parking"];
+                $vote = $hotel["vote"];
+                $distanceToCenter = $hotel["distance_to_center"];
+                echo
+                '<tr>' .
+                    '<th scope="row">' . $name . '</th>' .
+                    '<td>' . $description .'</td>' .
+                    '<td>' . $parking .'</td>' .
+                    '<td>' . $vote .'</td>' .
+                    '<td>' . $distanceToCenter .'</td>' .
+                    
+                    
+                '</tr>';
+            };
+    }
+        echo $userVote;
+        ?>
 
         </tbody>
         
