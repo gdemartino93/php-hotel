@@ -46,7 +46,14 @@
             ],
         ];
     $userVote = $_GET["vote"];
-
+    $filteredArray = array_filter(
+        $hotels,
+        function($vote){
+            return $vote === $userVote;
+        }
+    );
+    echo $filteredArray;
+    ?>
     ?>
 </head>
 <body>
@@ -94,14 +101,7 @@
             '</tr>';
         };
         echo $userVote;
-        $filteredArray = array_filter(
-            $hotels,
-            function($vote){
-                return $vote === $userVote;
-            }
-        );
-        echo $filteredArray;
-        ?>
+
 
         </tbody>
         
