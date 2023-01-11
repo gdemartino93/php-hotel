@@ -45,25 +45,21 @@
                 'distance_to_center' => 50
             ],
         ];
-        $filteredArray = array_filter(
-            $hotels,
-            function($hotel){
-                return $hotel['vote'] == $_GET["vote"];
-            }
-        );
+
         // var_dump($filteredArray);
     ?>
 
 </head>
 <body>
+
 <div class="container">
     <div class="row d-flex justify-content-start align-items-center my-5">
         <form class="d-flex flex-column col-4 ">
-            <label>Parcheggio Disponibile <input type="checkbox" name="parking" id="yes" class="mx-4"></label>
+            <label>Parcheggio Disponibile <input type="checkbox" name="parking" class="mx-4"></label>
             
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Inserisci il voto da 1 a 5" aria-label="Recipient's username" aria-describedby="button-addon2" name="vote">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" >Button</button>
+                <input type="number" class="form-control" placeholder="Inserisci il voto da 1 a 5" aria-label="Recipient's username" aria-describedby="button-addon2" name="vote" min="0" max="5">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" value="FILTER" >Button</button>
             </div>
 
             
@@ -83,46 +79,28 @@
         <tbody>
         <?php
 
-        if (isset($_GET["vote"]) === false){
+        // settiamo filterparking con l'elemento get che otteniamo...altrimenti se get è vuto settiamo la variabile filter parking su false
+        $filterParking = $_GET["parking"] ?? false;
+        $filterVote = $_GET["vote"] ?? 0;
+        foreach($hotels as $hotel){
+            $name = $hotel['name'];
+            $description = $hotel['description'];
+            $parking = $hotel['parking'];
+            $vote = $hotel['vote'];
+            $distanceToCenter = $hotel['distance_to_center'];
 
-       
-            foreach ($hotels as $hotel){
-                $name = $hotel["name"];
-                $description = $hotel["description"];
-                $parking = $hotel["parking"];
-                $vote = $hotel["vote"];
-                $distanceToCenter = $hotel["distance_to_center"];
-                echo
-                '<tr>' .
-                    '<th scope="row">' . $name . '</th>' .
-                    '<td>' . $description .'</td>' .
-                    '<td>' . $parking .'</td>' .
-                    '<td>' . $vote .'</td>' .
-                    '<td>' . $distanceToCenter .'</td>' .
-                    
-                    
-                '</tr>';
-            };
-        }else{
-            foreach ($filteredArray as $hotel){
-                $name = $hotel["name"];
-                $description = $hotel["description"];
-                $parking = $hotel["parking"];
-                $vote = $hotel["vote"];
-                $distanceToCenter = $hotel["distance_to_center"];
-                echo
-                '<tr>' .
-                    '<th scope="row">' . $name . '</th>' .
-                    '<td>' . $description .'</td>' .
-                    '<td>' . $parking .'</td>' .
-                    '<td>' . $vote .'</td>' .
-                    '<td>' . $distanceToCenter .'</td>' .
-                    
-                    
-                '</tr>';
-            };
-    }
-        echo $userVote;
+            // prima condizione: (stampiamo tutti gli elementi se il filtro non è attivao) oppure seconda condizione( se il filtro è attivo deve esserci anche il valore settato su parking)
+            if ($vote >= $filterVote && (!$filterParking || ($filterParking && $parking))){
+                echo '<tr>' .
+                        '<th scope="row">' . $name . '</th>' .
+                        '<td>' . $description .'</td>' .
+                        '<td>' . ($parking ? "YES" : "NO") .'</td>' .
+                        '<td>' . $vote .'</td>' .
+                        '<td>' . $distanceToCenter . ' km'.'</td>' .
+                    '</tr>';
+            
+            }
+        }
         ?>
 
         </tbody>
